@@ -7,22 +7,15 @@
 //
 
 #import "MYSFormLabelElement.h"
-#import "MYSFormTheme.h"
 
 
 @implementation MYSFormLabelElement
 
-+ (instancetype)labelElementWithText:(NSString *)text
++ (instancetype)labelElementWithText:(NSAttributedString *)text
 {
     MYSFormLabelElement *element = [self new];
     element.label = text;
     return element;
-}
-
-- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
-{
-    theme.backgroundColor = [UIColor clearColor];
-    theme.labelFont = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
 }
 
 @end

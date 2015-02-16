@@ -7,13 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MYSFormRelativePosition.h"
 
 
 @class MYSFormElement;
 @class MYSFormViewController;
 @class MYSFormCell;
 @class MYSFormTheme;
+
+
+/**
+ When requesting that a child element be presented next to a parent, an above or below position can sometimes be specified.
+ */
+typedef NS_ENUM(NSUInteger, MYSFormElementRelativePosition) {
+    MYSFormElementRelativePositionAbove,
+    MYSFormElementRelativePositionBelow
+};
 
 
 /**
@@ -82,7 +90,7 @@
  The theme that will be applied to all elements. Any elements with with themes of their own will be merged and any attributes on the element
  will take precedence.
  */
-@property (nonatomic, strong, readonly) MYSFormTheme *theme;
+@property (nonatomic, strong) MYSFormTheme *theme;
 
 
 /**
@@ -105,11 +113,6 @@
  Allows you to add an element at a specific index;
  */
 - (void)addFormElement:(MYSFormElement *)element atIndex:(NSInteger)index;
-
-/**
- This is an abstraction. All this is doing is adding the value you pass in to the bottom padding of the element above.
- */
-- (void)addPadding:(CGFloat)padding;
 
 /**
  Runs all the validations on the model and adds validation errors by the elements that failed their validations.

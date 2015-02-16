@@ -74,6 +74,12 @@
     self.label.textColor        = theme.inputLabelColor;
     self.textField.font         = theme.inputTextFont;
     self.textField.textColor    = theme.inputTextColor;
+    
+    if ([theme.textAlignment  isEqual: @"right"]) {
+        self.textField.textAlignment = UITextAlignmentRight;
+    }else if ([theme.textAlignment  isEqual: @"center"]) {
+        self.textField.textAlignment = UITextAlignmentCenter;
+    }
 }
 
 - (UIView *)textInput

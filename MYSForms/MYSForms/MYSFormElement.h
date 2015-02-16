@@ -56,15 +56,9 @@
 @property (nonatomic) Class cellClass;
 
 /**
- Subclasses can override this to customize the default theme that is created for each element. If an application applies a theme to the
- element it will take precedence over the defaults set in this override. Do not call this method directly.
- */
-- (void)configureClassThemeDefaults:(MYSFormTheme *)theme;
-
-/**
  The theme that will be applied to the appropriate views in the view representation of this element (the cell).
  */
-@property (nonatomic, strong, readonly) MYSFormTheme *theme;
+@property (nonatomic, strong) MYSFormTheme *theme;
 
 /**
  Is asked of the element to make sure this element can be added for this form/device/orientation/whatever.
@@ -76,11 +70,6 @@
  This calls the delegate (the form) to get the current model value for this element's key path.
  */
 - (id)currentModelValue;
-
-/**
- Calls teh delegate (the form) to get the current model value and applies the value transform on it to get the display value.
- */
-- (id)transformedModelValue;
 
 /**
  If any data on this element has changed, call this method to update the cell so it's displayed to the user.
@@ -157,7 +146,6 @@
 
 - (void)formElementDidRequestResignationOfFirstResponder:(MYSFormElement *)formElement;
 
-- (void)formElement:(MYSFormElement *)formElement didRequestPushOfViewController:(UIViewController *)viewController;
-
 @end
+
 

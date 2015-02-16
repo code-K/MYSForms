@@ -38,18 +38,17 @@
         [button addTarget:self action:@selector(buttonWasTapped:) forControlEvents:UIControlEventTouchUpInside];
         button.enabled = element.isEnabled;
     }
+
+    self.contentInsets = [element.theme.contentInsets UIEdgeInsetsValue];
 }
 
 - (void)applyTheme:(MYSFormTheme *)theme
 {
-    [super applyTheme:theme];
     for (MYSFormButton *button in self.buttons) {
         if (button.buttonStyle == MYSFormButtonStyleNone) {
             button.buttonStyle = [theme.buttonStyle integerValue];
         }
-        button.titleLabel.font = theme.buttonTitleFont;
     }
-    self.contentInsets = [theme.contentInsets UIEdgeInsetsValue];
 }
 
 - (void)layoutSubviews

@@ -10,41 +10,24 @@
 #import "MYSFormButton.h"
 
 
-typedef NS_ENUM(NSInteger, MYSFormThemeMergeStrategy) {
-    /**
-     Will only overwrite the receivers value if the receiver does not have a value.
-     */
-    MYSFormThemeMergeStrategyPassive,
-    /**
-     If a value on `theme` is present, it will overwrite the receiver's value.
-     */
-    MYSFormThemeMergeStrategyAggressive
-};
-
-
 @interface MYSFormTheme : NSObject
 
 + (instancetype)formThemeWithLabelFont:(UIFont *)font;
 
 + (instancetype)formThemeWithLabelFont:(UIFont *)font height:(CGFloat)height contentInsets:(UIEdgeInsets)insets;
 
-+ (instancetype)formThemeWithDefaults;
-
-- (void)mergeWithTheme:(MYSFormTheme *)theme strategy:(MYSFormThemeMergeStrategy)strategy;
+- (void)mergeWithTheme:(MYSFormTheme *)theme;
 
 @property (nonatomic, copy) UIFont *labelFont;
 
 @property (nonatomic, copy) UIColor *labelTextColor;
 
+@property (nonatomic, copy) NSString *textAlignment;
+
 /**
  NSValue of UIEdgeInsets
  */
 @property (nonatomic, copy) NSValue *contentInsets;
-
-/**
- NSValue of UIEdgeInsets.
- */
-@property (nonatomic, copy) NSValue *padding;
 
 @property (nonatomic, copy) UIColor *backgroundColor;
 
@@ -60,22 +43,14 @@ typedef NS_ENUM(NSInteger, MYSFormThemeMergeStrategy) {
 
 @property (nonatomic, copy) UIColor *tintColor;
 
-/**
- Error, loading, success message font.
- */
 @property (nonatomic, copy) UIFont *messageTextFont;
 
-/**
- Error, loading, success message text color.
- */
 @property (nonatomic, copy) UIColor *messageTextColor;
 
 /**
  NSNumber wrapped MYSFormButtonStyle enum value.
  */
 @property (nonatomic, copy) NSNumber *buttonStyle;
-
-@property (nonatomic, copy) UIFont *buttonTitleFont;
 
 @property (nonatomic, copy) UIColor *toggleOnTintColor;
 

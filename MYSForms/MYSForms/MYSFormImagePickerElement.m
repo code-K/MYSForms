@@ -8,7 +8,6 @@
 
 #import "MYSFormImagePickerElement.h"
 #import "MYSFormImagePickerCell-Private.h"
-#import "MYSFormTheme.h"
 
 
 NSString * const MYSFormImagePickerCellActionSheetButtonTakePhoto           = @"Take Photo";
@@ -64,11 +63,6 @@ NSString * const MYSFormImagePickerCellActionSheetButtonRemovePhoto         = @"
 - (void)beginEditing
 {
     [self formImagePickerCellWasTapped:nil];
-}
-
-- (void)configureClassThemeDefaults:(MYSFormTheme *)theme
-{
-    theme.backgroundColor = [UIColor clearColor];
 }
 
 

@@ -41,6 +41,11 @@
     [[self.cell textInput] becomeFirstResponder];
 }
 
+- (void)endEditing
+{
+    [[self.cell textInput] resignFirstResponder];
+}
+
 - (void)setCell:(MYSFormTextFieldCell *)cell
 {
     [super setCell:cell];

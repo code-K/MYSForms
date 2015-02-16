@@ -12,7 +12,7 @@
 
 
 @interface MYSFormDatePickerElement () <MYSFormDatePickerCellDelegate>
-@property (nonatomic, strong                  ) UIDatePicker *datePicker;
+//@property (nonatomic, strong                  ) UIDatePicker *datePicker;
 @property (nonatomic, assign, getter=isVisible) BOOL         visible;
 @end
 
@@ -73,7 +73,7 @@
 
 - (void)formDatePickerCellRequestedDatePicker:(MYSFormDatePickerCell *)cell
 {
-    id value = [self currentModelValue];
+    id value = [self.dataSource modelValueForFormElement:self];
     self.datePicker.date = value ?: [NSDate date];
     if (!self.isVisible) {
         self.visible = YES;

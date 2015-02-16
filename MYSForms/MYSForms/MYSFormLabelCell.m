@@ -19,17 +19,15 @@
     width -= insets.left + insets.right;
     CGSize size = [element.label boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                  options:NSStringDrawingUsesLineFragmentOrigin
-                                              attributes:@{
-                                                           NSFontAttributeName : element.theme.labelFont
-                                                           }
                                                  context:nil].size;
-    size.height = ceil(size.height) + insets.top + insets.bottom;
+    
+    size.height = ceil(size.height) + insets.top + insets.bottom + 40;
     return size;
 }
 
 - (void)populateWithElement:(MYSFormLabelElement *)element
 {
-    self.label.text = element.label;
+    self.label.attributedText = element.label;
     [super populateWithElement:element];
 }
 

@@ -14,9 +14,7 @@
 
 
 @interface MYSFormDatePickerCell ()
-@property (nonatomic, strong) NSDateFormatter      *dateFormatter;
-@property (nonatomic        ) NSDateFormatterStyle dateStyle;
-@property (nonatomic        ) NSDateFormatterStyle timeStyle;
+@property (nonatomic, strong) NSDateFormatter *dateFormatter;
 @end
 
 
@@ -27,30 +25,17 @@
     self.label.text     = element.label;
     self.button.enabled = element.isEnabled;
     self.dateFormatter  = element.dateFormatter;
-    if (element.datePicker.datePickerMode == UIDatePickerModeDate) {
-        self.dateStyle = NSDateFormatterShortStyle;
-        self.timeStyle = NSDateFormatterNoStyle;
-    }
-    else if (element.datePicker.datePickerMode == UIDatePickerModeTime) {
-        self.dateStyle = NSDateFormatterNoStyle;
-        self.timeStyle = NSDateFormatterShortStyle;
-    }
-    else {
-        self.dateStyle = NSDateFormatterShortStyle;
-        self.timeStyle = NSDateFormatterShortStyle;
-    }
     [super populateWithElement:element];
 }
 
 - (void)applyTheme:(MYSFormTheme *)theme
 {
     [super applyTheme:theme];
-    self.label.font      = theme.labelFont;
-    self.label.textColor = theme.labelTextColor;
+    self.label.font         = theme.labelFont;
+    self.label.textColor    = theme.labelTextColor;
     if (self.button.buttonStyle == MYSFormButtonStyleNone) {
         self.button.buttonStyle = [theme.buttonStyle integerValue];
     }
-    self.button.titleLabel.font = theme.buttonTitleFont;
 }
 
 - (NSString *)valueKeyPath
@@ -62,9 +47,8 @@
 {
     if (!self.dateFormatter) {
         self.dateFormatter = [NSDateFormatter new];
-        if (self.dateFormatter)
-        [self.dateFormatter setDateStyle:self.dateStyle];
-        [self.dateFormatter setTimeStyle:self.timeStyle];
+        [self.dateFormatter setDateStyle:NSDateFormatterShortStyle];
+        [self.dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     }
     NSString *title = [self.dateFormatter stringFromDate:self.selectedDate];
     [self.button setTitle:title forState:UIControlStateNormal];

@@ -12,7 +12,7 @@
 
 - (NSString *)failedString
 {
-    return [super failedString] ?: @"Can't be blank.";
+    return [super failedString] ?: @"Pflichtfeld.";
 }
 
 - (NSError *)errorFromValidatingValue:(id)value;

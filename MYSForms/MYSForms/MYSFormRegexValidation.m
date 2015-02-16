@@ -22,7 +22,7 @@
 
 - (NSString *)failedString
 {
-    return [super failedString] ?: @"Invalid Format.";
+    return [super failedString] ?: @"Falsches Format.";
 }
 
 - (NSError *)errorFromValidatingValue:(id)value;
@@ -101,7 +101,7 @@
 - (void)attemptToSetUserFriendlyFailureStringFromPattern:(NSString *)pattern
 {
     if ([pattern isEqualToString:MYSFormRegexValidationPatternEmail]) {
-        self.failedString = @"Must be a valid E-mail Address.";
+        self.failedString = @"Bitte eine gültige eMail-Adresse angeben.";
     }
 }
 
