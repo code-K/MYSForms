@@ -11,7 +11,7 @@
 
 @implementation MYSFormLabelElement
 
-+ (instancetype)labelElementWithText:(NSAttributedString *)text
++ (instancetype)labelElementWithText:(NSString *)text
 {
     MYSFormLabelElement *element = [self new];
     element.label = text;

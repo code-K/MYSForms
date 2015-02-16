@@ -12,8 +12,8 @@
 
 @interface MYSFormLabelElement : MYSFormElement
 
-@property (nonatomic, copy) NSAttributedString *label;
+@property (nonatomic, copy) NSString *label;
 
-+ (instancetype)labelElementWithText:(NSAttributedString *)text;
++ (instancetype)labelElementWithText:(NSString *)text;
 
 @end
