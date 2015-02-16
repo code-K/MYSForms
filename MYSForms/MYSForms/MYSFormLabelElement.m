@@ -15,6 +15,15 @@
 {
     MYSFormLabelElement *element = [self new];
     element.label = text;
+    element.attrLabel = nil;
+    return element;
+}
+
++ (instancetype)labelElementWithAttributedText:(NSMutableAttributedString *)attrText
+{
+    MYSFormLabelElement *element = [self new];
+    element.attrLabel = attrText;
+    element.label = nil;
     return element;
 }
 
