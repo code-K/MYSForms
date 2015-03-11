@@ -85,7 +85,7 @@
     MERGE(_padding,              theme.padding);
     MERGE(_backgroundColor,      theme.backgroundColor);
     MERGE(_height,               theme.height);
-	MERGE(_textAlignment,		 theme.textAlignment,		 strategy);
+	MERGE(_textAlignment,		 theme.textAlignment);
     MERGE(_inputLabelFont,       theme.inputLabelFont);
     MERGE(_inputLabelColor,      theme.inputLabelColor);
     MERGE(_inputTextFont,        theme.inputTextFont);

@@ -68,6 +68,8 @@
  */
 @property (nonatomic, strong) id model;
 
+@property (nonatomic, strong) NSMutableArray      *elements;
+
 /**
  The delegate for the form controller that lets you know of interesting events.
  */

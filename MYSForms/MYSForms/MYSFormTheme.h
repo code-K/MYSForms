@@ -24,6 +24,8 @@
 
 @property (nonatomic, copy) UIColor *labelTextColor;
 
+@property (nonatomic, copy) NSString *textAlignment;
+
 /**
  NSValue of UIEdgeInsets
  */

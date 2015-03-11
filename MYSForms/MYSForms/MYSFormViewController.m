@@ -20,7 +20,7 @@
                                      UITextFieldDelegate,
                                      MYSFormElementDataSource,
                                      MYSFormElementDelegate>
-@property (nonatomic, strong) NSMutableArray      *elements;
+//@property (nonatomic, strong) NSMutableArray      *elements;
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
 @property (nonatomic, strong) MYSFormTheme        *theme;
