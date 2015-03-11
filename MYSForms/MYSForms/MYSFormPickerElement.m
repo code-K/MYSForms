@@ -30,11 +30,10 @@
         _pickerView.dataSource      = self;
         _pickerView.delegate        = self;
         _pickerView.backgroundColor = [UIColor whiteColor];
+        _closesOnSelect             = YES;
     }
     return self;
 }
-
-
 
 
 #pragma mark - Public
@@ -45,6 +44,16 @@
     element.label                   = label;
     element.modelKeyPath            = modelKeyPath;
     return element;
+}
+
+- (void)openPicker
+{
+    [self.delegate formElement:self didRequestPresentationOfChildView:self.pickerView];
+}
+
+- (void)closePicker
+{
+    [self.delegate formElement:self didRequestDismissalOfChildView:self.pickerView];
 }
 
 - (void)setCell:(MYSFormPickerCell *)cell
@@ -133,14 +142,20 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    return self.data[row];
+    id value = self.data[row];
+    if (self.valueTransformer) {
+        value = [self.valueTransformer transformedValue:value];
+    }
+    return value;
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    id value = [self pickerView:pickerView titleForRow:row forComponent:component];
+    id value = self.data[row];
     [self.delegate formElement:self valueDidChange:value];
+    if (self.closesOnSelect) {
+        [self closePicker];
+    }
 }
-
 
 @end

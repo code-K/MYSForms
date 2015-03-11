@@ -73,11 +73,8 @@
 
 - (void)formDatePickerCellRequestedDatePicker:(MYSFormDatePickerCell *)cell
 {
-    id value = [self.dataSource modelValueForFormElement:self];
+    id value = [self currentModelValue];
     self.datePicker.date = value ?: [NSDate date];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"pickerTapped" object:self];
-    
     if (!self.isVisible) {
         self.visible = YES;
         [self.delegate formElement:self didRequestPresentationOfChildView:self.datePicker];

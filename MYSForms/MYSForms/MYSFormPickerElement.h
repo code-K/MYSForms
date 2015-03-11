@@ -21,6 +21,10 @@
 @property (nonatomic, copy) NSString *label;
 
 @property (nonatomic, strong                  ) UIPickerView   *pickerView;
+/**
+ Closes the picker as soon as the value changes. `YES` by default.
+ */
+@property (nonatomic) BOOL closesOnSelect;
 
 /**
  This allows you to set all the values of the picker at once.
@@ -32,6 +36,16 @@
  component at index, one is created, as well as any needed up to that index.
  */
 - (void)addValue:(id)value;
+
+/**
+ Open the actual picker below this element.
+ */
+- (void)openPicker;
+
+/**
+ If the picker is open, close it.
+ */
+- (void)closePicker;
 
 /**
  To fully control the contents of the picker view, set an object you control as the dataSource/delegate. Optionally, you can
