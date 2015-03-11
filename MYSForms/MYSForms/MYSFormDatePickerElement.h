@@ -24,7 +24,7 @@
 /**
  `YES` if the picker has currently been toggled visible in the form.
  */
-@property (nonatomic, assign, readonly, getter = isVisible) BOOL visible;
+@property (nonatomic, assign, getter = isVisible) BOOL visible;
 
 /**
  The date formatter to use when displaying the currently selected date on the element. (optional)

@@ -14,7 +14,7 @@
 @interface MYSFormPickerElement () <MYSFormPickerCellDelegate, UIPickerViewDataSource, UIPickerViewDelegate>
 @property (nonatomic, copy                    ) NSMutableArray *data;
 //@property (nonatomic, strong                  ) UIPickerView   *pickerView;
-@property (nonatomic, assign, getter=isVisible) BOOL           visible;
+//@property (nonatomic, assign, getter=isVisible) BOOL           visible;
 @end
 
 
@@ -98,6 +98,9 @@
 - (void)formPickerCellRequestedPicker:(MYSFormPickerCell *)cell
 {
     id value = [self.dataSource modelValueForFormElement:self];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"pickerTapped" object:self];
+    
     NSInteger index = [self.data indexOfObject:value];
     if (index != NSNotFound) {
         [self.pickerView selectRow:index inComponent:0 animated:YES];

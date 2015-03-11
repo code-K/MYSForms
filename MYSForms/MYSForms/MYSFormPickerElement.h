@@ -43,6 +43,6 @@
 /**
  `YES` if the picker has currently been toggled visible in the form.
  */
-@property (nonatomic, assign, readonly, getter = isVisible) BOOL visible;
+@property (nonatomic, assign, getter = isVisible) BOOL visible;
 
 @end

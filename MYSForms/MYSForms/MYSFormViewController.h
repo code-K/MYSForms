@@ -191,6 +191,8 @@ typedef NS_ENUM(NSUInteger, MYSFormElementRelativePosition) {
  */
 @property (nonatomic, assign) CGFloat fixedWidth;
 
+@property (nonatomic, strong) NSMutableArray      *elements;
+
 @end
 
 

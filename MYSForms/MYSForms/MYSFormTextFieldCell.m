@@ -76,9 +76,9 @@
     self.textField.textColor    = theme.inputTextColor;
     
     if ([theme.textAlignment  isEqual: @"right"]) {
-        self.textField.textAlignment = UITextAlignmentRight;
+        self.textField.textAlignment = NSTextAlignmentRight;
     }else if ([theme.textAlignment  isEqual: @"center"]) {
-        self.textField.textAlignment = UITextAlignmentCenter;
+        self.textField.textAlignment = NSTextAlignmentCenter;
     }
 }
 
@@ -126,23 +126,27 @@
 
 - (void)layoutLabelAndTextFieldWithText:(NSString *)text
 {
+    /*
     CGFloat labelHeight = [self.label.text sizeWithAttributes:@{ NSFontAttributeName : self.label.font }].height + 4;
     CGFloat textFieldHeight = [text sizeWithAttributes:@{ NSFontAttributeName : self.textField.font }].height + 4;
     CGFloat totalHeight = (labelHeight + 5 + textFieldHeight) - 4;
     CGFloat topAndBottomPadding = (self.bounds.size.height - totalHeight) / 2.0;
+    
     CGFloat labelDeltaY = CGRectGetMidY(self.label.frame) - topAndBottomPadding - (self.label.frame.size.height / 2.0);
     CGFloat textFieldDeltaY = CGRectGetMidY(self.textField.frame) - topAndBottomPadding - (self.textField.frame.size.height / 2.0);
+    */
+    
     if (![text isEqualToString:@""] && self.labelCenterYConstraint.constant == 0) {
         [UIView animateWithDuration:0.25 animations:^{
             self.label.alpha                            = 1;
-            self.labelCenterYConstraint.constant        = labelDeltaY;
-            self.textFieldCenterYConstraint.constant    = -textFieldDeltaY;
+            self.labelCenterYConstraint.constant        = 0;
+            self.textFieldCenterYConstraint.constant    = 0;
             [self layoutIfNeeded];
         }];
     }
     else if ([text isEqualToString:@""]) {
         [UIView animateWithDuration:0.25 animations:^{
-            self.label.alpha                            = 0;
+            self.label.alpha                            = 1;
             self.textFieldCenterYConstraint.constant    = 0;
             self.labelCenterYConstraint.constant        = 0;
             [self layoutIfNeeded];

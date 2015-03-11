@@ -18,7 +18,7 @@
                                      UITextFieldDelegate,
                                      MYSFormElementDataSource,
                                      MYSFormElementDelegate>
-@property (nonatomic, strong) NSMutableArray      *elements;
+//@property (nonatomic, strong) NSMutableArray      *elements;
 @property (nonatomic, strong) NSMutableDictionary *cachedCellSizes;
 @property (nonatomic, assign) NSUInteger          outstandingValidationErrorCount;
 @end
@@ -572,6 +572,7 @@
         UIViewAnimationCurve curve  = [note.userInfo[UIKeyboardAnimationCurveUserInfoKey] integerValue];
         UIEdgeInsets insets         = self.collectionView.contentInset;
         CGPoint offset              = self.collectionView.contentOffset;
+        //NSLog(@"%f", endFrame.size.height);
         
 //        if (self.interfaceOrientation == UIInterfaceOrientationPortrait ||
 //            self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
