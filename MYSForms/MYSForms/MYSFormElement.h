@@ -56,6 +56,12 @@
 @property (nonatomic) Class cellClass;
 
 /**
+ Subclasses can override this to customize the default theme that is created for each element. If an application applies a theme to the
+ element it will take precedence over the defaults set in this override. Do not call this method directly.
+ */
+- (void)configureClassThemeDefaults:(MYSFormTheme *)theme;
+
+/**
  The theme that will be applied to the appropriate views in the view representation of this element (the cell).
  */
 @property (nonatomic, strong) MYSFormTheme *theme;
@@ -72,7 +78,17 @@
 - (id)currentModelValue;
 
 /**
+ Calls teh delegate (the form) to get the current model value and applies the value transform on it to get the display value.
+ */
+- (id)transformedModelValue;
+
+/**
  If any data on this element has changed, call this method to update the cell so it's displayed to the user.
+ 
+ NOTE: If you subclass a cell and provide a custom xib, the theme of the element will not be applied to the cell.
+ Otherwise, there would be a danger of global defaults overriding customizations you've made to your views in your
+ custom xib. If you would like to restore this behavior. you can override this method in your custom element subclass
+ companion to the custom cell subclass and call `[self.cell applyTheme:[self evaluatedTheme]];` after calling super.
  */
 - (void)updateCell;
 
@@ -146,6 +162,9 @@
 
 - (void)formElementDidRequestResignationOfFirstResponder:(MYSFormElement *)formElement;
 
-@end
+- (void)formElement:(MYSFormElement *)formElement didRequestPushOfViewController:(UIViewController *)viewController;
 
+- (MYSFormTheme *)formElementFormTheme;
+
+@end
 

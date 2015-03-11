@@ -34,7 +34,7 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormImagePickerElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+    UIEdgeInsets insets = [[element evaluatedTheme].contentInsets UIEdgeInsetsValue];
     return CGSizeMake(width, insets.top + 100 + insets.bottom);
 }
 

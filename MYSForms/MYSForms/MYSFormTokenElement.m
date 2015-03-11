@@ -9,6 +9,7 @@
 #import "MYSFormTokenElement.h"
 #import "MYSFormTokenCell-Private.h"
 #import "MYSFormValueTransformer.h"
+#import "MYSFormTheme.h"
 
 
 @interface MYSFormTokenElement () <MYSFormTokenCellDelegate>
@@ -27,7 +28,16 @@
     if (self) {
         _modelKeyPath = modelKeyPath;
         _displayStringValueTransformer = [MYSFormValueTransformer transformerWithBlock:^id(id value) {
-            return valueTransformerBlock(value);
+            if (value && ![value conformsToProtocol:@protocol(NSFastEnumeration)]) {
+                [[NSException exceptionWithName:@"MYSFormTokenElementValueTransformerParamter"
+                                         reason:@"The value of the model for this element must conform to NSFastEnumeration"
+                                       userInfo:nil] raise];
+            }
+            NSMutableArray *displayStrings = [NSMutableArray new];
+            for (id obj in value) {
+                [displayStrings addObject:valueTransformerBlock(obj)];
+            }
+            return displayStrings;
         }];
     }
     return self;
@@ -46,12 +56,17 @@
     cell.tokenCellDelegate = self;
 }
 
-- (id)currentModelValue
+- (id)transformedModelValue
 {
     id value = [super currentModelValue];
     return [self.displayStringValueTransformer transformedValue:value];
 }
 
+- (void)configureClassDefaultTheme:(MYSFormTheme *)theme
+{
+    theme.backgroundColor = [UIColor clearColor];
+    theme.padding = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(10, 0, 10, 0)];
+}
 
 #pragma mark - DELEGATE token field cell
 

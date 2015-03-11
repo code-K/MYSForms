@@ -25,7 +25,7 @@ static CGFloat tokenSpacing = 8.0;
 
 + (CGSize)sizeRequiredForElement:(MYSFormTokenElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
+    UIEdgeInsets insets = [[element evaluatedTheme].contentInsets UIEdgeInsetsValue];
     MYSFormTokenCell *measurementCell = [[MYSFormTokenCell alloc] initWithFrame:CGRectMake(0, 0, width, 150)];
     [measurementCell setTokenDisplayStrings:[element currentModelValue]];
     [measurementCell populateWithElement:element];
@@ -44,7 +44,7 @@ static CGFloat tokenSpacing = 8.0;
 - (void)populateWithElement:(MYSFormElement *)element
 {
     [super populateWithElement:element];
-    self.contentInsets = [element.theme.contentInsets UIEdgeInsetsValue];
+    self.contentInsets = [[element evaluatedTheme].contentInsets UIEdgeInsetsValue];
 }
 
 - (NSString *)valueKeyPath
