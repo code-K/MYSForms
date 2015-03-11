@@ -56,7 +56,7 @@
     MYSFormTheme *theme = [self new];
     theme.labelFont              = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     theme.labelTextColor         = [UIColor blackColor];
-	theme.textAlignment			 = @"left" 
+	theme.textAlignment			 = @"left";
     theme.contentInsets          = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 20)];
     theme.padding                = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(1, 0, 0, 0)];
     theme.backgroundColor        = [UIColor whiteColor];
@@ -83,7 +83,7 @@
 {
     MERGE(_labelFont,            theme.labelFont,            strategy);
     MERGE(_labelTextColor,       theme.labelTextColor,       strategy);
-	MERGE(_textAlignment,		theme.textAlignment,			strategy);
+	MERGE(_textAlignment,		 theme.textAlignment,		 strategy);
     MERGE(_contentInsets,        theme.contentInsets,        strategy);
     MERGE(_padding,              theme.padding,              strategy);
     MERGE(_backgroundColor,      theme.backgroundColor,      strategy);
