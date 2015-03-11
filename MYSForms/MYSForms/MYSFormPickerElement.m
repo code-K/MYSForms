@@ -74,23 +74,12 @@
 
 - (void)setValues:(NSArray *)values
 {
-    NSMutableArray *newData = [NSMutableArray new];
-    for (id value in values) {
-        id transformedValue = value;
-        if (self.valueTransformer) {
-            transformedValue = [self.valueTransformer transformedValue:value];
-        }
-        [newData addObject:transformedValue];
-    }
-    self.data = newData;
+    self.data = [values mutableCopy];
     [self.pickerView reloadAllComponents];
 }
 
 - (void)addValue:(id)value
 {
-    if (self.valueTransformer) {
-        value = [self.valueTransformer transformedValue:value];
-    }
     [self.data addObject:value];
     [self.pickerView reloadAllComponents];
 }
@@ -106,7 +95,7 @@
 
 - (void)formPickerCellRequestedPicker:(MYSFormPickerCell *)cell
 {
-    id value = [self.dataSource modelValueForFormElement:self];
+    id value = [self currentModelValue];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"pickerTapped" object:self];
     
