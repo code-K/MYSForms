@@ -10,7 +10,7 @@
 
 
 @implementation MYSFormTheme
-
+/*
 - (instancetype)init
 {
     self = [super init];
@@ -35,7 +35,7 @@
     }
     return self;
 }
-
+*/
 + (instancetype)formThemeWithLabelFont:(UIFont *)font
 {
     MYSFormTheme *theme = [self new];
