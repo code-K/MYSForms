@@ -23,13 +23,12 @@ typedef NS_ENUM(NSInteger, MYSFormButtonStyle) {
     MYSFormButtonStyleFilled
 };
 
-
 @interface MYSFormButton : UIButton
 
 @property (nonatomic, copy) MYSFormButtonActionBlock action;
 
 @property (nonatomic) MYSFormButtonStyle buttonStyle;
 
-+ (instancetype)formButtonWithTitle:(NSString *)title style:(MYSFormButtonStyle)style action:(MYSFormButtonActionBlock)action;
++ (instancetype)formButtonWithTitle:(NSString *)title action:(MYSFormButtonActionBlock)action;
 
 @end

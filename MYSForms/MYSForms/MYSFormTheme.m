@@ -9,33 +9,11 @@
 #import "MYSFormTheme.h"
 
 
+#define MERGE(a, b) if (!a) a = [b copy]
+
+
 @implementation MYSFormTheme
-/*
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-        _labelFont             = nil;
-        _labelTextColor        = nil;
-		_textAlignment         = nil;
-        _padding               = nil;
-        _backgroundColor       = nil;
-        _height                = nil;
-        _inputLabelFont        = nil;
-        _inputLabelColor       = nil;
-        _inputTextFont         = nil;
-        _inputTextColor        = nil;
-        _tintColor             = nil;
-        _messageTextFont       = nil;
-        _messageTextColor      = nil;
-        _buttonStyle           = nil;
-        _buttonTitleFont       = nil;
-        _toggleOnTintColor     = nil;
-        _toggleThumbTintColor  = nil;
-    }
-    return self;
-}
-*/
+
 + (instancetype)formThemeWithLabelFont:(UIFont *)font
 {
     MYSFormTheme *theme = [self new];
@@ -45,58 +23,49 @@
 
 + (instancetype)formThemeWithLabelFont:(UIFont *)font height:(CGFloat)height contentInsets:(UIEdgeInsets)insets
 {
-    MYSFormTheme *theme = [self formThemeWithLabelFont:font];
-    theme.height        = @(height);
+    MYSFormTheme *theme = [self new];
+    theme.labelFont = font;
+    theme.height = @(height);
     theme.contentInsets = [NSValue valueWithUIEdgeInsets:insets];
     return theme;
 }
-
-+ (instancetype)formThemeWithDefaults
-{
-    MYSFormTheme *theme = [self new];
-    theme.labelFont              = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    theme.labelTextColor         = [UIColor blackColor];
-	theme.textAlignment			 = @"left";
-    theme.contentInsets          = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 20)];
-    theme.padding                = [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(1, 0, 0, 0)];
-    theme.backgroundColor        = [UIColor whiteColor];
-    theme.height                 = nil;
-    theme.inputLabelFont         = [UIFont preferredFontForTextStyle:UIFontTextStyleCaption1];
-    theme.inputLabelColor        = [UIColor lightGrayColor];
-    theme.inputTextFont          = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    theme.inputTextColor         = [UIColor blackColor];
-    theme.tintColor              = nil;
-    theme.messageTextFont        = [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote];
-    theme.messageTextColor       = [UIColor blackColor];
-    theme.buttonStyle            = @(MYSFormButtonStyleDefault);
-    theme.buttonTitleFont        = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    theme.toggleOnTintColor      = nil;
-    theme.toggleThumbTintColor   = nil;
-    return theme;
-}
-
-#define MERGE(a, b) if (b) { a = [b copy]; }
 
 - (void)mergeWithTheme:(MYSFormTheme *)theme
 {
     MERGE(_labelFont,            theme.labelFont);
     MERGE(_labelTextColor,       theme.labelTextColor);
+    MERGE(_textAlignment,        theme.textAlignment);
     MERGE(_contentInsets,        theme.contentInsets);
-    MERGE(_padding,              theme.padding);
     MERGE(_backgroundColor,      theme.backgroundColor);
     MERGE(_height,               theme.height);
-	MERGE(_textAlignment,		 theme.textAlignment);
-    MERGE(_inputLabelFont,       theme.inputLabelFont);
-    MERGE(_inputLabelColor,      theme.inputLabelColor);
     MERGE(_inputTextFont,        theme.inputTextFont);
     MERGE(_inputTextColor,       theme.inputTextColor);
     MERGE(_tintColor,            theme.tintColor);
     MERGE(_messageTextFont,      theme.messageTextFont);
     MERGE(_messageTextColor,     theme.messageTextColor);
     MERGE(_buttonStyle,          theme.buttonStyle);
-    MERGE(_buttonTitleFont,      theme.buttonTitleFont);
     MERGE(_toggleOnTintColor,    theme.toggleOnTintColor);
     MERGE(_toggleThumbTintColor, theme.toggleThumbTintColor);
 }
+
+
+#define GETTER(t, n, d) - (t *)n { if (_##n) { return _##n; } else { return d; } }
+
+GETTER(UIFont,   labelFont,             [UIFont preferredFontForTextStyle:UIFontTextStyleBody]);
+GETTER(UIColor,  labelTextColor,        [UIColor blackColor]);
+GETTER(NSString, textAlignment,         @"left");
+GETTER(NSValue,  contentInsets,         [NSValue valueWithUIEdgeInsets:UIEdgeInsetsMake(0, 20, 0, 20)]);
+GETTER(UIColor,  backgroundColor,       [UIColor whiteColor]);
+GETTER(NSNumber, height,                nil);
+GETTER(UIFont,   inputLabelFont,        [UIFont preferredFontForTextStyle:UIFontTextStyleBody]);
+GETTER(UIColor,  inputLabelColor,       [UIColor lightGrayColor]);
+GETTER(UIFont,   inputTextFont,         [UIFont preferredFontForTextStyle:UIFontTextStyleBody]);
+GETTER(UIColor,  inputTextColor,        [UIColor blackColor]);
+GETTER(UIColor,  tintColor,             nil);
+GETTER(UIFont,   messageTextFont,       [UIFont preferredFontForTextStyle:UIFontTextStyleFootnote]);
+GETTER(UIColor,  messageTextColor,      [UIColor blackColor]);
+GETTER(NSNumber, buttonStyle,           @(MYSFormButtonStyleDefault));
+GETTER(UIColor,  toggleOnTintColor,     nil);
+GETTER(UIColor,  toggleThumbTintColor,  nil);
 
 @end

@@ -7,10 +7,9 @@
 //
 
 #import "MYSFormElement.h"
-#import "MYSFormRelativePosition.h"
 
 
-typedef NS_ENUM(NSInteger, MYSFormChildElementType) {
+typedef NS_ENUM(NSUInteger, MYSFormChildElementType) {
     MYSFormChildElementTypeLoading,
     MYSFormChildElementTypeValidationError,
     MYSFormChildElementTypeError,
@@ -23,8 +22,6 @@ typedef NS_ENUM(NSInteger, MYSFormChildElementType) {
 
 @property (nonatomic, weak) MYSFormElement *parentElement;
 
-@property (nonatomic, readonly) MYSFormChildElementType type;
-
-@property (nonatomic, readonly) MYSFormElementRelativePosition position;
+@property (nonatomic, assign, readonly) MYSFormChildElementType type;
 
 @end

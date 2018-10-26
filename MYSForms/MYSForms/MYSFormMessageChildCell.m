@@ -8,8 +8,8 @@
 
 #import "MYSFormMessageChildCell.h"
 #import "MYSFormMessageChildElement.h"
-#import "MYSFormTheme.h"
 
+#import "MYSFormTheme.h"
 
 #define RED     [UIColor colorWithRed:(215.0/255.0) green:0 blue:0 alpha:1]
 #define GREEN   [UIColor colorWithRed:0 green:(215.0/255.0) blue:0 alpha:1]
@@ -24,7 +24,7 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormMessageChildElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [[element evaluatedTheme].contentInsets UIEdgeInsetsValue];
+    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
 
     width -= insets.left + insets.right - 5;
     CGSize size = [element.message boundingRectWithSize:CGSizeMake(width, FLT_MAX)
@@ -36,10 +36,7 @@
     size.height = ceil(size.height);
 
     // some padding
-    if (element.type == MYSFormChildElementTypeValidationError) {
-        size.height += 10;
-    }
-    else {
+    if (element.type != MYSFormChildElementTypeValidationError) {
         size.height += 20;
     }
 

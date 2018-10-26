@@ -36,7 +36,6 @@
     if (self.button.buttonStyle == MYSFormButtonStyleNone) {
         self.button.buttonStyle = [theme.buttonStyle integerValue];
     }
-    self.button.titleLabel.font = theme.buttonTitleFont;
 }
 
 

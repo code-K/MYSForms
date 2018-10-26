@@ -34,20 +34,18 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormTextViewElement *)element width:(CGFloat)width
 {
-    MYSFormTheme *theme = [element evaluatedTheme];
-
-    UIEdgeInsets insets = [theme.contentInsets UIEdgeInsetsValue];
+    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
 
     width -= insets.left + insets.right;
 
     // my guess at the padding UITextView adds to it's sides.
     width -= 13;
 
-    NSString *currentModelValue = [element transformedModelValue];
+    NSString *currentModelValue = [element currentModelValue];
     CGSize size = [currentModelValue boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                              options:NSStringDrawingUsesLineFragmentOrigin
                                           attributes:@{
-                                                       NSFontAttributeName : theme.inputTextFont
+                                                       NSFontAttributeName : element.theme.inputTextFont
                                                        }
                                              context:nil].size;
     size.height = ceil(size.height) + insets.top + insets.bottom;
@@ -62,8 +60,8 @@
 
 - (void)populateWithElement:(MYSFormTextViewElement *)element
 {
-    self.textView.font      = [element evaluatedTheme].inputTextFont;
-    self.textView.editable  = element.isEditable && element.isEnabled;
+    self.textView.font     = element.theme.inputTextFont;
+    self.textView.editable = element.isEditable && element.isEnabled;
     [super populateWithElement:element];
 }
 

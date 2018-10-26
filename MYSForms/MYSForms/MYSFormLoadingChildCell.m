@@ -19,8 +19,7 @@ static CGFloat standardSpacing  = 8;
 
 + (CGSize)sizeRequiredForElement:(MYSFormMessageChildElement *)element width:(CGFloat)width
 {
-    MYSFormTheme *theme = [element evaluatedTheme];
-    UIEdgeInsets insets = [theme.contentInsets UIEdgeInsetsValue];
+    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
 
     // subtract the cell margins
     width -= insets.left + insets.right;
@@ -31,7 +30,7 @@ static CGFloat standardSpacing  = 8;
     CGSize size = [element.message boundingRectWithSize:CGSizeMake(width, FLT_MAX)
                                                 options:NSStringDrawingUsesLineFragmentOrigin
                                              attributes:@{
-                                                          NSFontAttributeName : theme.messageTextFont
+                                                          NSFontAttributeName : element.theme.messageTextFont
                                                           }
                                                 context:nil].size;
     size.height = ceil(size.height);

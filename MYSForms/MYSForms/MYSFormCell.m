@@ -15,7 +15,7 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormElement *)element width:(CGFloat)width
 {
-    UIEdgeInsets insets = [[element evaluatedTheme].contentInsets UIEdgeInsetsValue];
+    UIEdgeInsets insets = [element.theme.contentInsets UIEdgeInsetsValue];
     return CGSizeMake(width, insets.top + 44 + insets.bottom);
 }
 

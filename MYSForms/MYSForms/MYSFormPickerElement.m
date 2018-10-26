@@ -30,10 +30,11 @@
         _pickerView.dataSource      = self;
         _pickerView.delegate        = self;
         _pickerView.backgroundColor = [UIColor whiteColor];
-        _closesOnSelect             = YES;
     }
     return self;
 }
+
+
 
 
 #pragma mark - Public
@@ -44,16 +45,6 @@
     element.label                   = label;
     element.modelKeyPath            = modelKeyPath;
     return element;
-}
-
-- (void)openPicker
-{
-    [self.delegate formElement:self didRequestPresentationOfChildView:self.pickerView];
-}
-
-- (void)closePicker
-{
-    [self.delegate formElement:self didRequestDismissalOfChildView:self.pickerView];
 }
 
 - (void)setCell:(MYSFormPickerCell *)cell
@@ -74,12 +65,23 @@
 
 - (void)setValues:(NSArray *)values
 {
-    self.data = [values mutableCopy];
+    NSMutableArray *newData = [NSMutableArray new];
+    for (id value in values) {
+        id transformedValue = value;
+        if (self.valueTransformer) {
+            transformedValue = [self.valueTransformer transformedValue:value];
+        }
+        [newData addObject:transformedValue];
+    }
+    self.data = newData;
     [self.pickerView reloadAllComponents];
 }
 
 - (void)addValue:(id)value
 {
+    if (self.valueTransformer) {
+        value = [self.valueTransformer transformedValue:value];
+    }
     [self.data addObject:value];
     [self.pickerView reloadAllComponents];
 }
@@ -95,7 +97,7 @@
 
 - (void)formPickerCellRequestedPicker:(MYSFormPickerCell *)cell
 {
-    id value = [self currentModelValue];
+    id value = [self.dataSource modelValueForFormElement:self];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"pickerTapped" object:self];
     
@@ -131,20 +133,14 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
-    id value = self.data[row];
-    if (self.valueTransformer) {
-        value = [self.valueTransformer transformedValue:value];
-    }
-    return value;
+    return self.data[row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    id value = self.data[row];
+    id value = [self pickerView:pickerView titleForRow:row forComponent:component];
     [self.delegate formElement:self valueDidChange:value];
-    if (self.closesOnSelect) {
-        [self closePicker];
-    }
 }
+
 
 @end

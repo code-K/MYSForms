@@ -44,10 +44,9 @@
 
 + (CGSize)sizeRequiredForElement:(MYSFormTextFieldElement *)element width:(CGFloat)width
 {
-    MYSFormTheme *theme = [element evaluatedTheme];
-    UIEdgeInsets insets     = [theme.contentInsets UIEdgeInsetsValue];
-    CGSize labelSize        = [element.label sizeWithAttributes:@{ NSFontAttributeName : theme.inputLabelFont }];
-    CGSize textFieldSize    = [@"A" sizeWithAttributes:@{ NSFontAttributeName : theme.inputTextFont }];
+    UIEdgeInsets insets     = [element.theme.contentInsets UIEdgeInsetsValue];
+    CGSize labelSize        = [element.label sizeWithAttributes:@{ NSFontAttributeName : element.theme.inputLabelFont }];
+    CGSize textFieldSize    = [@"A" sizeWithAttributes:@{ NSFontAttributeName : element.theme.inputTextFont }];
     CGFloat height          = ceil(labelSize.height) + 7 + ceil(textFieldSize.height) + 7 + insets.top + insets.bottom;
     return CGSizeMake(width, height);
 }
@@ -77,9 +76,9 @@
     self.textField.textColor    = theme.inputTextColor;
     
     if ([theme.textAlignment  isEqual: @"right"]) {
-        self.textField.textAlignment = NSTextAlignmentRight;
+        self.textField.textAlignment = UITextAlignmentRight;
     }else if ([theme.textAlignment  isEqual: @"center"]) {
-        self.textField.textAlignment = NSTextAlignmentCenter;
+        self.textField.textAlignment = UITextAlignmentCenter;
     }
 }
 
@@ -127,16 +126,12 @@
 
 - (void)layoutLabelAndTextFieldWithText:(NSString *)text
 {
-    /*
     CGFloat labelHeight = [self.label.text sizeWithAttributes:@{ NSFontAttributeName : self.label.font }].height + 4;
     CGFloat textFieldHeight = [text sizeWithAttributes:@{ NSFontAttributeName : self.textField.font }].height + 4;
     CGFloat totalHeight = (labelHeight + 5 + textFieldHeight) - 4;
     CGFloat topAndBottomPadding = (self.bounds.size.height - totalHeight) / 2.0;
-    
     CGFloat labelDeltaY = CGRectGetMidY(self.label.frame) - topAndBottomPadding - (self.label.frame.size.height / 2.0);
     CGFloat textFieldDeltaY = CGRectGetMidY(self.textField.frame) - topAndBottomPadding - (self.textField.frame.size.height / 2.0);
-    */
-    
     if (![text isEqualToString:@""] && self.labelCenterYConstraint.constant == 0) {
         [UIView animateWithDuration:0.25 animations:^{
             self.label.alpha                            = 1;

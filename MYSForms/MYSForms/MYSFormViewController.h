@@ -7,13 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MYSFormRelativePosition.h"
 
 
 @class MYSFormElement;
 @class MYSFormViewController;
 @class MYSFormCell;
 @class MYSFormTheme;
+
+
+/**
+ When requesting that a child element be presented next to a parent, an above or below position can sometimes be specified.
+ */
+typedef NS_ENUM(NSUInteger, MYSFormElementRelativePosition) {
+    MYSFormElementRelativePositionAbove,
+    MYSFormElementRelativePositionBelow
+};
 
 
 /**
@@ -68,8 +76,6 @@
  */
 @property (nonatomic, strong) id model;
 
-@property (nonatomic, strong) NSMutableArray      *elements;
-
 /**
  The delegate for the form controller that lets you know of interesting events.
  */
@@ -84,7 +90,7 @@
  The theme that will be applied to all elements. Any elements with with themes of their own will be merged and any attributes on the element
  will take precedence.
  */
-@property (nonatomic, strong, readonly) MYSFormTheme *theme;
+@property (nonatomic, strong) MYSFormTheme *theme;
 
 
 /**
@@ -184,6 +190,8 @@
  width of the container. If the value is bigger than the width of the container, the value of the container will be used.
  */
 @property (nonatomic, assign) CGFloat fixedWidth;
+
+@property (nonatomic, strong) NSMutableArray      *elements;
 
 @end
 
